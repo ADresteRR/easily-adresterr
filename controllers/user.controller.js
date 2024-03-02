@@ -20,7 +20,7 @@ class Recruiter {
         const { email, password } = req.body;
         const result = RecruiterModel.validateUser(email, password);
         if (!result) {
-            return res.status(404).send("invalid credential");
+            return res.render("fourzerofour.ejs", { errorMessage: "user not found pls register" });
         }
         req.session.userdata = { email: email };
         res.redirect("/jobs");

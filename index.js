@@ -4,6 +4,7 @@ import session from "express-session";
 import { Recruiter } from "./controllers/user.controller.js";
 import JobController from "./controllers/job.contoller.js";
 import path from "path";
+import authLogin from "./middlewares/auth.middleware.js";
 const server = express();
 // global middlewares
 server.use(express.static(path.join(path.resolve(), "public")));
@@ -29,5 +30,7 @@ server.get("/", (req, res) => {
 server.get("/login", RecruiterController.getLogin);
 server.post("/login", RecruiterController.postLogin);
 server.post("/register", RecruiterController.postRegister);
+
 server.get("/jobs", jobController.getJobs)
+server.get("/jobs/new", authLogin);
 export default server;
