@@ -1,3 +1,6 @@
+function generateUniqueId() {
+    return Math.floor(Math.random() * 1000000000).toString(36) + Date.now().toString(36);
+}
 const jobs = [
     {
         id: 1,
@@ -7,10 +10,10 @@ const jobs = [
         companyname: "Amazon",
         salary: "45LPA",
         applyby: "19/12/2024",
-        skillrequired: ["Java", "Python"],
+        skillsrequired: ["Java", "Python"],
         numberofopening: 10,
         jobposted: "19/12/2023",
-        applicants: []
+        applicants: ["dummy"]
     },
 ];
 /**
@@ -42,9 +45,19 @@ class Jobs {
     // during job creation applicants list is empty anyways
     static addJob(jobsdetails) {
         jobs.push({
-            id: jobs.length + 1,
+            id: generateUniqueId(),
             ...jobsdetails
         })
+    }
+    static getJobById(id) {
+        const result = jobs.find((job) => job.id == id)
+        return result;
+    }
+    static addApplicantById(id, applicantObj) {
+        const idx = jobs.findIndex(job => job.id == id);
+        jobs[idx].applicants.push(applicantObj);
+        console.log(jobs);
+        return;
     }
 }
 export default Jobs;

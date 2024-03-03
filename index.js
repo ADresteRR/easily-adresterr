@@ -5,8 +5,11 @@ import { Recruiter } from "./controllers/user.controller.js";
 import JobController from "./controllers/job.contoller.js";
 import path from "path";
 import authLogin, { authLogout } from "./middlewares/auth.middleware.js";
+import multer from "multer";
+import fileUpload from "./middlewares/file.middleware.js";
 const server = express();
 // global middlewares
+const upload = fileUpload;
 server.use(express.static(path.join(path.resolve(), "public")));
 server.set("view engine", "ejs");
 server.set("views", "./views");
@@ -33,5 +36,10 @@ server.get("/logout", authLogout, RecruiterController.logout);
 server.post("/register", RecruiterController.postRegister);
 
 server.get("/jobs", jobController.getJobs)
-server.get("/jobs/new", authLogin);
+server.get("/job/:id", jobController.getJobDetails);
+server.get("/postjob", authLogin, jobController.getpostjob);
+server.post("/job", authLogin, jobController.postjob);
+
+
+server.post("/apply/:id", upload.single('resume'), jobController.applyJobById);
 export default server;

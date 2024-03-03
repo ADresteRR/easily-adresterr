@@ -1,4 +1,4 @@
-import RecruiterModel from "../models/recruiter.model.js";
+import RecruiterModel from "../models/user.model.js";
 class Recruiter {
     /**
      * 

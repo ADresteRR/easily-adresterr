@@ -1,4 +1,9 @@
-const Users = [];
+const Users = [{
+    id: 2,
+    name: "anjan",
+    email: "anjandasnitj@gmail.com",
+    password: "1234"
+}];
 class Recruiter {
     static getAllUsers() {
         return Users;
@@ -15,6 +20,15 @@ class Recruiter {
         const result = Users.find((user) => (user.email == email && user.password == password));
         return result;
     }
-};
 
+};
+export class Applicant {
+    static makeApplicantObj(email, contact, resumePath) {
+        return {
+            "email": email,
+            "contact": contact,
+            "resumepath": resumePath
+        };
+    }
+}
 export default Recruiter;
