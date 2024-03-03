@@ -22,7 +22,7 @@ class Recruiter {
         if (!result) {
             return res.render("fourzerofour.ejs", { errorMessage: "user not found pls register" });
         }
-        req.session.userdata = { email: email };
+        req.session.userdata = { email: email, name: result.name };
         res.redirect("/jobs");
     }
     /**
@@ -35,6 +35,10 @@ class Recruiter {
         console.log(req.body);
         const { name, email, password } = req.body;
         RecruiterModel.addUser(name, email, password);
+        res.redirect("/login");
+    }
+    logout(req, res) {
+        req.session.destroy();
         res.redirect("/login");
     }
 };

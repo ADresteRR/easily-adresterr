@@ -5,3 +5,10 @@ export default function authLogin(req, res, next) {
     }
     next();
 }
+export function authLogout(req, res, next) {
+    const email = req.session.userdata?.email;
+    if (!email) {
+        return res.redirect("/login");
+    }
+    next();
+}

@@ -28,11 +28,22 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Recruiter
+                        <% if(locals?.name) {%>
+                            <%= locals?.name %>
+                                <% } else{ %>
+                                    recruiter
+                                    <%}%>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/login">Login</a>
-                        <a class="dropdown-item" href="/jobs/new">Post new job</a>
+                        <% if(locals?.name) { %>
+                            <a class="dropdown-item" href="/logout">
+                                logout
+                            </a>
+                            <% } else { %>
+                                <a class="dropdown-item" href="/login">Login</a>
+                                <% } %>
+
+                                    <a class="dropdown-item" href="/jobs/new">Post new job</a>
                     </div>
                 </li>
             </ul>
