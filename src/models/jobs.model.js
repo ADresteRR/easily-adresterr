@@ -13,12 +13,7 @@ const jobs = [
         skillsrequired: ["Java", "Python"],
         numberofopening: 10,
         jobposted: "19/12/2023",
-        applicants: [{
-            name: "anjan",
-            email: 'test@gmail.com',
-            contact: '+919002996850',
-            resumepath: 'DR. B R AMBEDKAR NATIONAL INSTITUTE OF TECHNOLOGY(DEPARTMENT OF COMPUTER SCIENCE AND TECHNOLOGY) (1).pdf'
-        }]
+        applicants: []
     },
 ];
 /**
