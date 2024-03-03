@@ -1,16 +1,20 @@
+import JobsModel from "./jobs.model.js";
 const Users = [{
     id: 2,
-    name: "anjan",
-    email: "anjandasnitj@gmail.com",
+    name: "test",
+    email: "test@gmail.com",
     password: "1234"
 }];
+function idGen() {
+    return Math.floor(Math.random() * 1000000000).toString(36) + Date.now().toString(36);
+}
 class Recruiter {
     static getAllUsers() {
         return Users;
     }
     static addUser(name, email, password) {
         Users.push({
-            "id": Users.length + 1,
+            "id": idGen(),
             "name": name,
             "email": email,
             "password": password
@@ -23,8 +27,10 @@ class Recruiter {
 
 };
 export class Applicant {
-    static makeApplicantObj(email, contact, resumePath) {
+    static makeApplicantObj(name, email, contact, resumePath) {
         return {
+            "id": idGen(),
+            "name": name,
             "email": email,
             "contact": contact,
             "resumepath": resumePath

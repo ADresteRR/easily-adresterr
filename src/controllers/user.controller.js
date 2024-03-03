@@ -1,4 +1,6 @@
-import RecruiterModel from "../models/user.model.js";
+import RecruiterModel, { Applicant } from "../models/user.model.js";
+import JobModel from "../models/jobs.model.js";
+import { application } from "express";
 class Recruiter {
     /**
      * 
@@ -42,5 +44,15 @@ class Recruiter {
         res.redirect("/login");
     }
 };
+export class ApplicantController {
+    getApplicants(req, res) {
+        const jobId = req.params.id;
+        // console.log(jobId);
+        const applicantsDetails = JobModel.getJobApplicantsById(jobId).applicants;
+        // console.log(applicants);
+        // res.send("success");
+        res.render("applicants.ejs", { name: req.session.userdata?.name, applicants: applicantsDetails });
 
+    }
+}
 export { Recruiter };

@@ -1,5 +1,6 @@
 import JobModel from "../models/jobs.model.js";
 import { Applicant } from "../models/user.model.js";
+import path from "path";
 class JobController {
     getJobs(req, res) {
         console.log(req.session.userdata?.name);
@@ -16,6 +17,7 @@ class JobController {
      */
     postjob(req, res) {
         console.log(req.body);
+        JobModel.addJob(req.body);
         res.redirect("/jobs");
     }
     getJobDetails(req, res) {
@@ -30,12 +32,30 @@ class JobController {
      */
     applyJobById(req, res) {
         const id = req.params.id;
-        const { email, contact } = req.body;
+        const { name, email, contact } = req.body;
         const resumePath = req.file.path;
-        console.log(id, email, contact, resumePath);
-        const applicantObject = Applicant.makeApplicantObj(email, contact, resumePath);
+        console.log("resume path : ", resumePath);
+        // console.log(id, email, contact, resumePath);
+        const applicantObject = Applicant.makeApplicantObj(name, email, contact, resumePath);
         JobModel.addApplicantById(id, applicantObject);
         res.redirect("/jobs");
+    }
+    deletejob(req, res) {
+        const jobid = req.params.id;
+        JobModel.deleteById(jobid);
+        res.redirect("/jobs");
+
+    }
+    putUpdate(req, res) {
+        const jobid = req.params.id;
+        JobModel.update(jobid, req.body);
+        res.redirect("/jobs");
+
+    }
+    getUpdate(req, res) {
+        const jobid = req.params.id;
+        const jobDetails = JobModel.getJobById(jobid);
+        res.render("updatedetails.ejs", { name: req.session.userdata?.name, job: jobDetails });
     }
 };
 export default JobController;
