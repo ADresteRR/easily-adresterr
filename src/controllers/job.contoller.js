@@ -33,7 +33,7 @@ class JobController {
     applyJobById(req, res) {
         const id = req.params.id;
         const { name, email, contact } = req.body;
-        const resumePath = req.file.path;
+        const resumePath = req.file.filename;
         console.log("resume path : ", resumePath);
         // console.log(id, email, contact, resumePath);
         const applicantObject = Applicant.makeApplicantObj(name, email, contact, resumePath);
