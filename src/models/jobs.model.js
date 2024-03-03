@@ -115,5 +115,9 @@ class Jobs {
         jobs[idx] = newJob;
         console.log(jobs[idx]);
     }
+    static getByCompanyName(companyName) {
+        const result = jobs.find(job => job.companyname == companyName);
+        return result;
+    }
 }
 export default Jobs;

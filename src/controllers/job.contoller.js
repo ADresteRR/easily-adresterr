@@ -57,5 +57,10 @@ class JobController {
         const jobDetails = JobModel.getJobById(jobid);
         res.render("updatedetails.ejs", { name: req.session.userdata?.name, job: jobDetails });
     }
+    findJobByCompany(req, res) {
+        const cmpname = req.body.companyname;
+        const result = JobModel.getByCompanyName(cmpname);
+        res.render("jobs.ejs", { jobs: [result], name: req.session.userdata?.name });
+    }
 };
 export default JobController;

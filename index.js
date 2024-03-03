@@ -48,4 +48,5 @@ server.post("/delete/:id", authLogin, jobController.deletejob);
 server.get("/job/applicants/:id", authLogin, applicantController.getApplicants);
 
 server.post("/apply/:id", upload.single('resume'), jobController.applyJobById);
+server.post("/search", jobController.findJobByCompany)
 export default server;
